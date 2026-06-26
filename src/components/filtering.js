@@ -26,7 +26,7 @@ export function initFiltering(elements, indexes) {
             if (input) input.value = '';
             const field = action.dataset.field;
             if (field) state[field] = '';
-        }
+          }
     // @todo: #4.5 — отфильтровать данные используя компаратор
     
     return data.filter(row => compare(row, state)); 

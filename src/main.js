@@ -3,14 +3,13 @@ import './style.css'
 
 import {data as sourceData} from "./data/dataset_1.js";
 
-import {initData} from "./data.js";
-import {processFormData} from "./lib/utils.js";
-
-import {initTable} from "./components/table.js";
-import { initPagination } from './components/pagination.js';
-import { initSorting } from './components/sorting.js';
-import { initFiltering } from './components/filtering.js';
-import { initSearching } from './components/searching.js';
+import { initData } from "./data.js";
+import { processFormData } from "./lib/utils.js";
+import { initSearching } from "./components/searching.js";
+import { initFiltering } from "./components/filtering.js";
+import { initSorting } from "./components/sorting.js";
+import { initPagination } from "./components/pagination.js";
+import { initTable } from "./components/table.js";
 
 
 // Исходные данные используемые в render()
@@ -30,7 +29,8 @@ function collectState() {
     return {                                            // расширьте существующий return вот так
         ...state,
         rowsPerPage,
-        page
+        page,
+        total,
     };
 }
 
