@@ -1,7 +1,7 @@
-import {sortCollection, sortMap} from "../lib/sort.js";
+import {sortMap} from "../lib/sort.js";
 
 export function initSorting(columns) {
-    return (data, state, action) => {
+    return (query, state, action) => {
         let field = null;
         let order = null;
 
@@ -12,20 +12,20 @@ export function initSorting(columns) {
             order = action.dataset.value;  // Направление заберём прямо из датасета для точности
             // @todo: #3.2 — сбросить сортировки остальных колонок
             columns.forEach(column => {                                    // Перебираем элементы (в columns у нас массив кнопок)
-        if (column.dataset.field !== action.dataset.field) {    // Если это не та кнопка, что нажал пользователь
-            column.dataset.value = 'none';                        // тогда сбрасываем её в начальное состояние
-        }
-     });
+                if (column.dataset.field !== action.dataset.field) {    // Если это не та кнопка, что нажал пользователь
+                    column.dataset.value = 'none';                        // тогда сбрасываем её в начальное состояние
+                }});
         } else {
             // @todo: #3.3 — получить выбранный режим сортировки
             columns.forEach(column => {    // Перебираем все наши кнопки сортировки
-         if (column.dataset.value !== 'none') {   // Ищем ту, что находится не в начальном состоянии (предполагаем, что одна)
-            field = column.dataset.field;   // Сохраняем в переменных поле
-            order = column.dataset.value;   // и направление сортировки
+                if (column.dataset.value !== 'none') {   // Ищем ту, что находится не в начальном состоянии (предполагаем, что одна)
+                    field = column.dataset.field;   // Сохраняем в переменных поле
+                    order = column.dataset.value;   // и направление сортировки
+                }
+            });
         }
-     });
-        }
+        const sort = (field && order !== 'none') ? `${field}:${order}` : null; // сохраним в переменную параметр сортировки в виде field:direction
 
-        return sortCollection(data, field, order);
+        return sort ? Object.assign({}, query, { sort }) : query; // по общему принципу, если есть сортировка, добавляем, если нет, то не трогаем query
     };
 }
