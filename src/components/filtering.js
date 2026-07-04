@@ -24,6 +24,7 @@ export function initFiltering(elements) {
         if (fieldName in state) {
           state[fieldName] = "";
         }
+        return query;
       }
          
 
